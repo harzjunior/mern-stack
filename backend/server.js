@@ -42,7 +42,7 @@ mongoose
   .catch((err) => {
     console.log(err);
   }); //catch error
-
+  
 //listen for requests 3,
 //we need nodemon to keep listening for live changes 4
 //nodemon server in terminal to detect live changes
