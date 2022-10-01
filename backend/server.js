@@ -2,11 +2,16 @@
 require("dotenv").config();
 //to use express, we need to import the express module 1
 const express = require("express");
+//import mongoose 14
+const mongoose = require("mongoose");
+//import the workouts file from routes folder 11
+const workoutRoutes = require("./routes/workouts");
 
 //invoke the express module 2
 const app = express();
 
 //middleware: to monitor the in-between resquest and response from the server  10
+app.use(express.json()); //to handle POST and DELETE requests. looks at the body for any existing data, and then accesss it in request handler/patch when json passes it to express 13
 app.use((req, res, next) => {
   console.log(req.path, req.method); //the url path, and methods type e.g "GET", "POST", "PUT", "DELETE", "PATCH
   next(); // with out next then the  middleware will stuck to a current middleware
@@ -16,24 +21,27 @@ app.use((req, res, next) => {
 //METHODS: GET
 //GET /workouts   --> gets all the workouts document
 //React to request with Route handler 6
-app.get("/workouts", (req, res) => {
-  res.json({ msg: "Welcome young Wizard!" });
-});
+// app.get("/workouts", (req, res) => {
+//   res.json({ msg: "Welcome young Wizard!" });
+// });
 
-//METHODS: POST
-//GET /workouts   --> creates a new workouts document
+//use the workoutRoutes 12
+app.use("/api/workouts/", workoutRoutes);
 
-//METHODS: GET
-//GET /workouts/:id   --> gets a single workout document
-app.get("/workouts", (req, res) => {
-  res.json({ msg: "Welcome young Wizard!" });
-});
-
-//METHODS: DELETE
-//GET /workouts/:id   --> deletes a single workout document
-
-//METHODS: PATCH
-//GET /workouts   --> updates a single workouts document
+//connect to mongodb database. this takes time therefore, it's async, this returns a promise  15
+mongoose
+  .connect(process.env.MONGO_URI)
+  .then(() => {
+    app.listen(process.env.PORT, function () {
+      console.log(
+        "Connected to MongoDB & listening on port ",
+        process.env.PORT
+      );
+    }); //listen to request once connection is established with the database
+  }) //when complete,
+  .catch((err) => {
+    console.log(err);
+  }); //catch error
 
 //listen for requests 3,
 //we need nodemon to keep listening for live changes 4
@@ -47,6 +55,6 @@ app.get("/workouts", (req, res) => {
 // });
 
 //restart the environment server 9
-app.listen(process.env.PORT, function () {
-  console.log("listening on port ", process.env.PORT);
-});
+// app.listen(process.env.PORT, function () {
+//   console.log("listening on port ", process.env.PORT);
+// });
