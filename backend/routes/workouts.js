@@ -1,6 +1,10 @@
 //import express from 'express'; 1
 const express = require("express");
-const createWorkout = require("../controllers/workoutController");
+const {
+  getWorkouts,
+  createWorkout,
+  getSingleWorkout,
+} = require("../controllers/workoutController");
 // const workoutModels = require("../models/workoutModels"); // no need for this, it's has been moved to  workoutController.js
 
 //create instance router 2
@@ -11,21 +15,17 @@ const router = express.Router();
 
 //METHODS: GET
 //GET /workouts   --> gets all the workouts document
-router.get("/", (req, res) => {
-  res.json({ msg: "GET all Workouts!" });
-});
+router.get("/", getWorkouts);
 
 //METHODS: GET
 //GET /workouts/:id   --> gets a single workout document
-router.get("/:id", (req, res) => {
-  res.json({ msg: "GET single Workout!" });
-});
+router.get("/:id", getSingleWorkout);
 
 //METHODS: POST,    sends data to the server, we can access that from request params/object. we can access that using express.json middleware in server files
 //GET /workouts   --> creates a new workouts document
 router.post(
   "/",
-  createWorkout()
+  createWorkout
 
   // async (req, res) => {
   //   // req.body = JSON.stringify(req.body); //

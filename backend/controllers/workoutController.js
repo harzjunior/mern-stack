@@ -1,13 +1,19 @@
 // our handler functions
 //we will need our workoutModels
 const workoutModels = require("../models/workoutModels");
+const mongoose = require("mongoose"); // to check id hex type
 
 //============================================================================
 //METHODS: GET
 //GET /workouts
 //--> gets all the workouts document
-const getWorkouts = (req, res) => {
-  res.json({ msg: "DELETE a Workout!" });
+const getWorkouts = async (req, res) => {
+  //object that represent the the new document we wanna get
+  const workouts = await workoutModels
+    .find({}) //empty arguments finds all documents, e.g if we want to get just reps then finds({reps: 20});
+    .sort({ createdAt: -1 }); //sort by created date in descending  order
+
+  res.status(200).json(workouts); // send a workouts responds if everything (our received document) is ok
 };
 
 //============================================================================
@@ -15,8 +21,28 @@ const getWorkouts = (req, res) => {
 //METHODS: GET
 //GET /workouts/:id
 //--> gets a single workout document
-const getSingleWorkout = (req, res) => {
-  res.json({ msg: "DELETE a Workout!" });
+const getSingleWorkout = async (req, res) => {
+  //object that represent the the new document we wanna get
+  const { id } = req.params; //grab by id which will be used to get the single doc, all routes parameters are stored in params properties
+
+  //check if id is 12 bytes or a string of 24 hex characters
+  //if not valid return 404
+  // if (!mongoose.isObjectIdOrHexString(id)) {
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({ error: "Invalid id" });
+  }
+
+  //object that represent the the new document we wanna get
+  const workout = await workoutModels.findById(id); //id arguments finds doc by id, e.g if we want to get an _id then findById(_id: ...);
+
+  //handle error if workout is null/empty
+  //if workout does not exist then 404, not found
+  if (!workout) {
+    return res.status(404).json({ error: "Workout not found" });
+  }
+  //if workout exists return workout
+  res.status(200).json(workout);
 };
 
 //============================================================================
@@ -35,7 +61,7 @@ const createWorkout = async (req, res) => {
       reps,
       load,
     }); // create a knew workout ( using oiur workoutModels model) 7. this is async
-    res.status(200).json(workout); // send a wourk responds if everything is ok 9
+    res.status(200).json(workout); // send a workout responds if everything is ok 9
   } catch (err) {
     res.status(400).json({ error: err.message }); // if there is an error then send back a json error message 10
   }
@@ -60,4 +86,4 @@ const updateSingleWorkout = (req, res) => {
 };
 
 //export all the functions
-module.exports = { getWorkouts,createWorkout };
+module.exports = { getWorkouts, getSingleWorkout, createWorkout };
