@@ -7,33 +7,33 @@ const router = express.Router();
 //API Endpoints
 
 //METHODS: GET
-//GET /workouts   --> get all doc
+//GET /fitness   --> get all doc
 router.get("/", (req, res) => {
   res.json({ msg: "Welcome young Wizard!" });
 });
 
 //METHODS: GET
-//GET /workouts/:id   --> get single doc
+//GET /fitness/:id   --> get single doc
 router.get("/:id", (req, res) => {
-  res.json({ msg: "GET single Workout!" });
+  res.json({ msg: "GET single Fitness!" });
 });
 
 //METHODS: POST,
-//GET /workouts   --> create a new doc
+//GET /fitness   --> create a new doc
 router.post("/", (req, res) => {
-  res.json({ msg: "POST a new Workout!" });
+  res.json({ msg: "POST a new Fitness!" });
 });
 
 //METHODS: DELETE
-//GET /workouts/:id   --> delete a doc
+//GET /fitness/:id   --> delete a doc
 router.delete("/:id", (req, res) => {
-  res.json({ msg: "DELETE a Workout!" });
+  res.json({ msg: "DELETE a Fitness!" });
 });
 
 //METHODS: PATCH
-//GET /workouts   --> update a doc
+//GET /fitness   --> update a doc
 router.patch("/:id", (req, res) => {
-  res.json({ msg: "UPDATE a Workout!" });
+  res.json({ msg: "UPDATE a Fitness!" });
 });
 
 //export the router instance

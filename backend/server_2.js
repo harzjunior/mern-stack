@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const workoutRoutes = require("./routes/workoutTwo");
+const workoutFitness = require("./routes/fitness_2");
 
 const port = 4002;
 
@@ -12,7 +12,7 @@ app.use((req, res, next) => {
 });
 
 //imported API endpoint router as workoutRoutes
-app.use("/", workoutRoutes);
+app.use("/", workoutFitness);
 
 //listen for requests
 app.listen(port, function () {
