@@ -5,7 +5,7 @@ const {
   createFitness,
   deleteSingleFitness,
   updateFitness,
-} = require("../controllers/fitnessController_3");
+} = require("../controllers/fitnessController_4");
 
 //create instance router
 const router = express.Router();

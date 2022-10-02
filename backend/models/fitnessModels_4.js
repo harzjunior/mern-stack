@@ -9,6 +9,10 @@ const fitnessSchema = new Schema(
       type: String,
       required: true,
     },
+    des: {
+      type: String,
+      required: true,
+    },
     reps: {
       type: Number,
       required: true,

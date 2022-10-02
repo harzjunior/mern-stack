@@ -48,7 +48,7 @@ const getSingleWorkout = async (req, res) => {
 //============================================================================
 
 //METHODS: POST,    sends data to the server, we can access that from request params/object. we can access that using express.json middleware in server files
-//GET /workouts
+//POST /workouts
 //--> creates a new workouts document
 const createWorkout = async (req, res) => {
   const { title, reps, load } = req.body; // the schema properties from req and set to req body object 5
@@ -70,7 +70,7 @@ const createWorkout = async (req, res) => {
 //============================================================================
 
 //METHODS: DELETE
-//GET /workouts/:id
+//DELETE /workouts/:id
 //--> deletes a single workout document
 const deleteSingleWorkout = async (req, res) => {
   //object that represent the the new document we wanna get
@@ -99,7 +99,7 @@ const deleteSingleWorkout = async (req, res) => {
 //============================================================================
 
 //METHODS: PATCH     sends data to the server, we can access that from request params/object. we can access that using express.json middleware in server files
-//GET /workouts
+//PATCH /workouts
 //--> updates a single workouts document
 const updateWorkout = async (req, res) => {
   //object that represent the the new document we wanna get

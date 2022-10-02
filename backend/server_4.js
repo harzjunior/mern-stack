@@ -1,7 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
-const workoutFitness = require("./routes/fitness_3");
+const workoutFitness = require("./routes/fitness_4");
 
 const port = 4004;
 
