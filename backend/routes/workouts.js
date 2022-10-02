@@ -4,6 +4,8 @@ const {
   getWorkouts,
   createWorkout,
   getSingleWorkout,
+  deleteSingleWorkout,
+  updateWorkout,
 } = require("../controllers/workoutController");
 // const workoutModels = require("../models/workoutModels"); // no need for this, it's has been moved to  workoutController.js
 
@@ -50,15 +52,11 @@ router.post(
 
 //METHODS: DELETE
 //GET /workouts/:id   --> deletes a single workout document
-router.delete("/:id", (req, res) => {
-  res.json({ msg: "DELETE a Workout!" });
-});
+router.delete("/:id", deleteSingleWorkout);
 
 //METHODS: PATCH     sends data to the server, we can access that from request params/object. we can access that using express.json middleware in server files
 //GET /workouts   --> updates a single workouts document
-router.patch("/:id", (req, res) => {
-  res.json({ msg: "UPDATE a Workout!" });
-});
+router.patch("/:id", updateWorkout);
 
 //export the router instance 4
 module.exports = router;
