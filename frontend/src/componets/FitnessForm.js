@@ -19,14 +19,14 @@ const FitnessForm = () => {
 
     const fitness = { title, des, reps, load };
 
-    //fetch request to post fitness data its path (fitness/)
+    //fetch request to post fitness data and its path (fitness/)
     const response = await fetch(`fitness/`, {
       method: "POST",
       body: JSON.stringify(fitness),
       headers: { "Content-Type": "application/json" },
     }); //stringify changes (fitness) body to JSON string: and header property content type is json
 
-    const json = await response.json();
+    const json = await response.json(); // the created request doc in json object format
 
     //check if response is not ok then update the state
     if (!response.ok) {

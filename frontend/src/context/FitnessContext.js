@@ -21,6 +21,11 @@ export const fitnessReducer = (state, action) => {
       return {
         fitness: [action.payload, ...state.fitness], //new object plus the previously copied object
       };
+    case "DELETE_FITNESS": //will be used as a dispatch to fetch the fitness doc to be deleted
+      return {
+        //filter throught the initial state by ID before making any changes and return true if we want to doc to remain else false if we don't
+        fitness: state.fitness.filter((fit) => fit._id !== action.payload._id), // the doc with ID not equal
+      };
     default:
       break;
   }
