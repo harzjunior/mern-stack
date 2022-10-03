@@ -2,7 +2,6 @@ import React from "react";
 
 const FitnessDetails = ({ fitness }) => {
   const { title, des, reps, load, createdAt } = fitness;
-  console.log(fitness);
   return (
     <div className="fitness-details">
       <h4>{title}</h4>
