@@ -5,7 +5,9 @@ const FitnessDetails = ({ fitness }) => {
   return (
     <div className="fitness-details">
       <h4>{title}</h4>
-      <p>Description {des}</p>
+      <p>
+        <strong>Description:</strong> {des}
+      </p>
       <p>
         <strong>Load: (kg)</strong> {load}
       </p>
