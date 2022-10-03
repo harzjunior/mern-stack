@@ -1,6 +1,11 @@
 import React, { useState } from "react";
+import { useFitnessContext } from "../hooks/useFitnessContext";
 
 const FitnessForm = () => {
+  //we need to update our dispatch action when we successfully added new doc to our database
+  //therefore, we'll need the useFitnessContext hook we created earlier
+  const { dispatch } = useFitnessContext(); //we only need the dispatch function,
+
   //states for our properties
   const [title, setTitle] = useState("");
   const [des, setDes] = useState("");
@@ -36,6 +41,10 @@ const FitnessForm = () => {
       setLoad("");
       setError(null);
       console.log("New Fitness Successfully Added", json);
+      dispatch({
+        type: "CREATE_FITNESS",
+        payload: json, //payload will be the single fitness doc that was created
+      }); //we will use dispatch only when a new doc has been added to the database
     }
   };
 

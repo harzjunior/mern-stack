@@ -13,11 +13,11 @@ export const FitnessContext = createContext();
 //action --> the dispatch function from useReducer state
 export const fitnessReducer = (state, action) => {
   switch (action.type) {
-    case "SET_FITNESS":
+    case "SET_FITNESS": //will be used as a dispatch to fetch the fitness doc
       return {
         fitness: action.payload, //will be what we get from the server_4
       };
-    case "CREATE_FITNESS":
+    case "CREATE_FITNESS": //will be used as a dispatch to update our state only when doc has been created and submitted to the db
       return {
         fitness: [action.payload, ...state.fitness], //new object plus the previously copied object
       };
