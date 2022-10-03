@@ -51,18 +51,22 @@ const FitnessForm = () => {
       />
 
       <label>Fitness Description:</label>
-      <input type="text" onChange={(e) => setDes(e.target.value)} value={des} />
+      <textarea
+        type="text"
+        onChange={(e) => setDes(e.target.value)}
+        value={des}
+      />
 
       <label>Fitness Reps:</label>
       <input
-        type="text"
+        type="number"
         onChange={(e) => setReps(e.target.value)}
         value={reps}
       />
 
       <label>Fitness Load in (kg):</label>
       <input
-        type="text"
+        type="number"
         onChange={(e) => setLoad(e.target.value)}
         value={load}
       />
