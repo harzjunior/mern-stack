@@ -110,3 +110,11 @@ div.error {
   border-radius: 4px;
   margin: 20px 0;
 }
+
+/* error form */
+input.errorfield {
+  border: 1px solid var(--error);
+}
+textarea.errorfield {
+  border: 1px solid var(--error);
+}

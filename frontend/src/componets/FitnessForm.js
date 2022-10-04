@@ -12,6 +12,7 @@ const FitnessForm = () => {
   const [reps, setReps] = useState("");
   const [load, setLoad] = useState("");
   const [error, setError] = useState(null);
+  const [emptyFields, setEmptyFields] = useState([]);
 
   //functions: async, because we are reaching out to the API
   const handleSubmit = async (e) => {
@@ -31,6 +32,7 @@ const FitnessForm = () => {
     //check if response is not ok then update the state
     if (!response.ok) {
       setError(json.error); //the error property
+      setEmptyFields(json.emptyFields); //the empty fields from the server_4
     }
 
     if (response.ok) {
@@ -41,6 +43,7 @@ const FitnessForm = () => {
       setLoad("");
       setError(null);
       console.log("New Fitness Successfully Added", json);
+      setEmptyFields([]);
       dispatch({
         type: "CREATE_FITNESS",
         payload: json, //payload will be the single fitness doc that was created
@@ -57,6 +60,7 @@ const FitnessForm = () => {
         type="text"
         onChange={(e) => setTitle(e.target.value)}
         value={title}
+        className={emptyFields.includes("title") ? "errorfield" : ""} //styling error field dyanmically
       />
 
       <label>Fitness Description:</label>
@@ -64,6 +68,7 @@ const FitnessForm = () => {
         type="text"
         onChange={(e) => setDes(e.target.value)}
         value={des}
+        className={emptyFields.includes("description") ? "errorfield" : ""} //styling error field dyanmically
       />
 
       <label>Fitness Reps:</label>
@@ -71,6 +76,7 @@ const FitnessForm = () => {
         type="number"
         onChange={(e) => setReps(e.target.value)}
         value={reps}
+        className={emptyFields.includes("reps") ? "errorfield" : ""} //styling error field dyanmically
       />
 
       <label>Fitness Load in (kg):</label>
@@ -78,6 +84,7 @@ const FitnessForm = () => {
         type="number"
         onChange={(e) => setLoad(e.target.value)}
         value={load}
+        className={emptyFields.includes("load") ? "errorfield" : ""} //styling error field dyanmically
       />
       <button>Add Fitness</button>
       {error && <div className="error">{error}</div>}

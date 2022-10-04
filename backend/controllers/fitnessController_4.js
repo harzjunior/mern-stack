@@ -37,6 +37,29 @@ const getSingleFitness = async (req, res) => {
 //--> create a new fitness doc
 const createFitness = async (req, res) => {
   const { title, des, reps, load } = req.body;
+
+  const emptyFields = []; //arra to handle form errors
+
+  //logics for the fitness property empty fields
+  if (!title) {
+    emptyFields.push("title");
+  }
+  if (!des) {
+    emptyFields.push("description");
+  }
+  if (!reps) {
+    emptyFields.push("reps");
+  }
+  if (!load) {
+    emptyFields.push("load");
+  }
+  //check if the length of emptyField > 0.
+  if (emptyFields.length > 0) {
+    return res
+      .status(400)
+      .json({ error: "Please fill in the required fields", emptyFields }); // the error message and the emptyFields array for the form
+  }
+
   try {
     const fitness = await fitnessModels.create({
       title,
